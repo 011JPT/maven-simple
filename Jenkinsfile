@@ -11,13 +11,15 @@ pipeline{
         }
         stage ('Upload Jar To Nexus') {
             steps {
-                nexusArtifactUploader artifacts: [
-                    [
-                        artifactId: 'maven-simple', 
-                        classifier: '', 
-                        file: 'target/maven-simple-1.0.0.jar', 
-                        type: 'jar'
-                    ]
+                script {
+                    def mavenPom = readMavenPom file: 'pom.xml'
+                    nexusArtifactUploader artifacts: [
+                      [
+                         artifactId: 'maven-simple', 
+                         classifier: '', 
+                         file: "target/maven-simple-${mavenPom.version}.jar", 
+                         type: 'jar'
+                      ]
                 ], 
                 credentialsId: 'nexus3', 
                 groupId: 'com.github.jitpack', 
@@ -25,7 +27,9 @@ pipeline{
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'maven-simple-release', 
-                version: '1.0.0'
+                version: "${mavenPom.version}"
+                }
+
             }
         }
     }
