@@ -15,10 +15,10 @@ pipeline{
                     def mavenPom = readMavenPom file: 'pom.xml'
                     nexusArtifactUploader artifacts: [
                       [
-                         artifactId: 'maven-simple', 
-                         classifier: '', 
-                         file: "target/maven-simple-${mavenPom.version}.jar", 
-                         type: 'jar'
+                            artifactId: 'maven-simple', 
+                            classifier: '', 
+                            file: "target/maven-simple-${mavenPom.version}.jar", 
+                            type: 'jar'
                       ]
                 ], 
                 credentialsId: 'nexus3', 
@@ -28,9 +28,9 @@ pipeline{
                 protocol: 'http', 
                 repository: 'maven-simple-release', 
                 version: "${mavenPom.version}"
-                }
+                    }
 
-            }
+                 }
         }
     }
 }
