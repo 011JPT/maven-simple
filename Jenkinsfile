@@ -15,7 +15,7 @@ pipeline{
                     [
                         artifactId: 'maven-simple', 
                         classifier: '', 
-                        file: 'target/Simple-Maven-1.0.0.jar', 
+                        file: 'target/maven-simple-1.0.0.jar', 
                         type: 'jar'
                     ]
                 ], 
